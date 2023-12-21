@@ -69,27 +69,28 @@ const MealsAvailable = () => {
  useEffect(() => {
    const fetchData = async () => {
      try {
+      // add your own database from firebase here of  which the  json is given at the top in the DUMMY_MEALS obj.
        const response = await fetch(
-         "https://food-order-database-fb5fc-default-rtdb.firebaseio.com/meals.json"
+         "example.com/meals.json"
        );
-
+        console.log(response);
        if (!response.ok) {
          throw new Error("Failed to fetch the list");
        }
 
        const data = await response.json();
+       console.log(data);
        const loadedMeals = [];
-
+       
        for (const item in data) {
          loadedMeals.push({
            id: item,
            name: data[item].name,
            description: data[item].description,
            price: data[item].price,
-         });
-       }
-
-       setMeals(loadedMeals);
+          });
+        }
+        setMeals(loadedMeals);
        setIsLoading(false);
        setError(null); 
      } catch (e) {
@@ -126,15 +127,3 @@ const MealsAvailable = () => {
 
 export default MealsAvailable;
 
-
-
-//  {
-//    /* {error && <p className={classes.error}>*Error occurred! {error}</p>}
-//       {isLoading ? (
-//         <p className={classes.loading}>Loading....</p>
-//         ) : (
-//           <Card>
-//           <ul>{mealsList}</ul>
-//         </Card>
-//       )} */
-//  }
